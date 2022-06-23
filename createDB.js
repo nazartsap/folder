@@ -1,9 +1,19 @@
-var MongoClient = require("mongodb").MongoClient
+var MongoClient = require('mongodb').MongoClient
+var data = require("./data.js").data 
 
-MongoClient.connect("mongodb://localhost:27017", function(err,db){
-    if(err) throw err
-    var collection = db.collection("heroes")
-    collection.insertOne({name:"RTX3090"},function(err,result){
-        db.close()
-    })
-})
+const uri = "mongodb://localhost:27017/"
+const client = new MongoClient(uri)
+async function run() {
+    try  {
+        await client.connect();
+        var database = client.db("3070");
+        database.dropDatabase()
+        database = client.db("3070");
+        const heroes = database.collection("heroes");
+        const result = await heroes.insertMany(data);
+        console.log(`${result.insertedCount} documents were inserted`);
+    } finally {
+        await client.close();
+    }
+}
+run()
