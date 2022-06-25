@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
     Hero.find({},{_id:0,title:1,nick:1},function(err,menu){
       req.session.greeting = "Hi!!!!"
       res.render('index', {
-                              title: 'Мир Современных технологий',
+                              title: 'Мир современнных технологий',
                               menu: menu,
                               counter: req.session.counter
                           });
@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
 router.get('/logreg', function(req, res, next) {
   res.render('logreg',{title: 'Вход', error: null});
 });
-  
+
 /* POST login/registration page. */
 router.post('/logreg', function(req, res, next) {
   var username = req.body.username
@@ -28,7 +28,7 @@ router.post('/logreg', function(req, res, next) {
     if(err) return next(err)
     if(user){
       if(user.checkPassword(password)){
-        req.session.user = user
+        req.session.user = user._id
         res.redirect('/')
       } else {
         res.render('logreg', {title: 'Вход', error: 'Пароль не верный'})
@@ -37,11 +37,18 @@ router.post('/logreg', function(req, res, next) {
       var user = new User({username:username,password:password})
             user.save(function(err,user){
                 if(err) return next(err)
-                req.session.user = user
+                req.session.user = user._id
                 res.redirect('/')
             })     
     }
 })
+});
+
+/* POST logout. */
+router.post('/logout', function(req, res, next) {
+  req.session.destroy()
+  res.locals.user = null;
+  res.redirect('/')
 });
 
 module.exports = router;
