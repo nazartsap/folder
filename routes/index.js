@@ -7,9 +7,10 @@ var Hero = require("../models/hero").Hero
 router.get('/', function(req, res, next) {
 		Hero.find({},{_id:0,title:1,nick:1},function(err,menu){
 			req.session.greeting = "Hi!!!"
-			res.cookie('greeting', 'Hi!!!').render('index', {
+			res.render('index', {
 																title: 'Мир новых технологий',
-																menu: menu
+																menu: menu,
+																counter:req.session.counter 
 														});
 		})
 
