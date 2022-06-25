@@ -4,7 +4,7 @@
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link href="/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css">
-    <script src="/jquery/dist/jquery.js"></script>
+    <script src="/jquery/dist/jquery.js"></script> 
     <script src="/bootstrap/dist/js/bootstrap.js"></script>
 </head>
 <body>
@@ -14,10 +14,27 @@
       <li class="nav-item">
        <a class="nav-link active" href="/">Главная</a>
       </li>
-      <% menu.forEach(function(hero){ %>
-        <li><a href="/heroes/<%=hero.nick%>"><%=hero.title%></a></li>
-        <% }) %>  
-      </ul>
+    <!-- <li class="nav-item">
+       <a class="nav-link" href="/heroes/sonic">Соник</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/heroes/tails">Тейлз</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/heroes/knuckles">Наклз</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/heroes/eggman">Доктор Эггман</a>
+      </li> -->
+      <% if(typeof nav=='object' && nav){ nav.forEach(function(item){ %>
+        <li class="nav-item">
+          <a class="nav-link" href="/heroes/<%=item.nick%>">
+            <%=item.title%>
+          </a>
+        </li>
+        <% })} %>
+    </ul>
+
   </div>
 </nav>
     <%- body %>
