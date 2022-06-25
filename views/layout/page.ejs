@@ -14,10 +14,10 @@
       <li class="nav-item">
        <a class="nav-link active" href="/">Главная</a>
       </li>
-    </ul>
-    <% menu.forEach(function(hero){ %>
-      <li><a href="/heroes/<%=hero.nick%>"><%=hero.title%></a></li>
-      <% }) %>    
+      <% menu.forEach(function(hero){ %>
+        <li><a href="/heroes/<%=hero.nick%>"><%=hero.title%></a></li>
+        <% }) %>  
+      </ul>
   </div>
 </nav>
     <%- body %>
