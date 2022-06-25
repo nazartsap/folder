@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
     Hero.find({},{_id:0,title:1,nick:1},function(err,menu){
       req.session.greeting = "Hi!!!!"
       res.render('index', {
-                              title: 'Мир новых технологий',
+                              title: 'Мир Современных технологий',
                               menu: menu,
                               counter: req.session.counter
                           });
@@ -17,8 +17,8 @@ router.get('/', function(req, res, next) {
 
 /* GET login/registration page. */
 router.get('/logreg', function(req, res, next) {
-  res.render('logreg',{title: 'Вход'});
-  });
+  res.render('logreg',{title: 'Вход', error: null});
+});
   
 /* POST login/registration page. */
 router.post('/logreg', function(req, res, next) {
@@ -44,4 +44,4 @@ router.post('/logreg', function(req, res, next) {
 })
 });
 
-module.exports = router
+module.exports = router;
